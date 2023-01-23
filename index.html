@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.js"></script>
+    </head>
+    <body>
+        <h1 id="title"></h1>
+        <h1 id="artist"></h1>
+    </body>
+    <script>
+		'use strict';
+		//use jQuery ajax call
+		$.ajax({
+			url: "https://prt.wostreaming.net/prt/nowplaying/2/6/3057/nowplaying.xml",
+			cache: false,
+			dataType: "xml",
+			success: function(xml){
+				$(xml).find("performances").each(function(){
+					// Parse xml first elements
+					var artist = $(this).find("artist:eq(0)").text();
+					var title = $(this).find("title:eq(0)").text(); 
+                    // add parse results to page
+                    $("#artist").append(artist);
+					$("#title").append(title);
+				});
+			}	
+		});
+
+    </script>
+</html>
